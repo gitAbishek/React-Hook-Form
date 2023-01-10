@@ -19,7 +19,7 @@ const Navbar = () => {
         <Flex pl="5" pr="5" gap="10">
           <NavLink to="/"> Home </NavLink>
 
-          <NavLink to="/posts"> Posts </NavLink>
+          
 
           <NavLink to="/contact"> Contact </NavLink>
 
