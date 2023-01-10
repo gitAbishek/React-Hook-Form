@@ -156,7 +156,7 @@ const SignUp = () => {
               </FormErrorMessage>
             </FormControl>
 
-            <Button type="submit" variant="solid" colorScheme="teal">
+            <Button type="submit" variant="solid" colorScheme="teal" >
               Create
             </Button>
           </Stack>
