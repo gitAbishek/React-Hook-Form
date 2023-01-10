@@ -1,23 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
+
+import {Routes,Route} from 'react-router-dom'
+
+
+import Home from './components/Pages/Home';
+import Contact from './components/Pages/Contact';
+import Navbar from './components/Navbar/Navbar';
+import Login from './components/Pages/Login';
+import SignUp from './components/Pages/SignUp';
+import Posts from './components/Pages/Posts';
+
+import {Divider} from "@chakra-ui/react"
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
+     <Navbar />
+     <Divider />
+     <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="contact" element={<Contact />} />
+      <Route path="login" element={<Login />}/>
+      <Route path="signup" element={<SignUp />}/>
+      <Route path="posts" element={<Posts />} />
+     </Routes>
     </div>
   );
 }
