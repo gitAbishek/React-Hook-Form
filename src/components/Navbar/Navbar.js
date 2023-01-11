@@ -7,7 +7,7 @@ const Navbar = () => {
   const clear = (e) =>{
     e.preventDefault()
     localStorage.clear()
-    history('/signin')
+    history('/signup')
 
   }
   return (

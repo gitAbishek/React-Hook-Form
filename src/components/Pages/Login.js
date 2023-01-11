@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { BiShow } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 import {
   Box,
@@ -10,11 +11,14 @@ import {
   Button,
   FormErrorMessage,
   Text,
+  InputGroup,
+  InputRightElement
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [getData, setGetData] = useState([]);
+  const [show, setShow] = useState(false);
 
   const history = useNavigate()
   const {
@@ -27,6 +31,10 @@ const Login = () => {
       password: "",
     },
   });
+
+  const handleClick = () =>{
+    setShow(!show)
+  }
 
   const onSubmit = (data) => {
     const {email,password} = data;
@@ -81,13 +89,18 @@ const Login = () => {
 
             <FormControl isInvalid={errors.password}>
               <FormLabel color="gray.500">Password</FormLabel>
+              <InputGroup>
               <Input
                 id="password"
-                type="password"
+                type={show ? "text" : "password"}
                 {...register("password", {
                   required: "password is required",
                 })}
               />
+              <InputRightElement>
+                  <BiShow color="pink" cursor="pointer" onClick={handleClick} />
+                </InputRightElement>
+              </InputGroup>
               <FormErrorMessage>
                 {errors.password && errors.password.message}
               </FormErrorMessage>

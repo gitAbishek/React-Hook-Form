@@ -22,7 +22,7 @@ import { useNavigate } from "react-router-dom";
 const SignUp = () => {
   const [show, setShow] = useState(false);
   const history = useNavigate();
-  
+
   const handleClick = () => {
     setShow(!show);
   };
@@ -43,7 +43,7 @@ const SignUp = () => {
 
   const onSubmit = (value) => {
     localStorage.setItem("datakey", JSON.stringify(value));
-    history('/signin')
+    history("/signin");
   };
 
   return (
