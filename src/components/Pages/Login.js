@@ -31,16 +31,16 @@ const Login = () => {
   return (
     <Flex justifyContent="center" alignItems="center" gap="10" mt="20">
       <Box
-        width="25%"
+        width={['85%','65%','50%','40%','25%']}
         p="10"
         height="fit-content"
-        border="1px solid pink"
+        shadow="md"
         borderRadius="5"
       >
         <form onSubmit={handleSubmit(onSubmit)}>
           <Stack spacing="5">
-          <Text pb="5" color="red.300">
-              Login Here.....
+          <Text pb="5" color="blue.700">
+              Login From here.....
             </Text>
             <FormControl isInvalid={errors.username}>
               <FormLabel color="gray.500">UserName</FormLabel>
@@ -77,7 +77,7 @@ const Login = () => {
             </FormControl>
 
             <Button type="submit" variant="solid" colorScheme="teal">
-              Create
+              Login
             </Button>
           </Stack>
         </form>

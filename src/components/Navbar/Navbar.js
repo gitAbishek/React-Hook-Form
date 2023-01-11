@@ -10,6 +10,8 @@ const Navbar = () => {
         w="100%"
         p={5}
         display="flex"
+        flexDir={['column','column','row','row','row']}
+        gap={['10','10',null,null,null]}
         justifyContent="space-between"
         alignItems="center"
         h="20"

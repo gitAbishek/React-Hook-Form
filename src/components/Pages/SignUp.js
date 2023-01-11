@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 
 import { BiShow } from "react-icons/bi";
 
@@ -21,8 +21,6 @@ const SignUp = () => {
   const [show, setShow] = useState(false);
   const [value, setValue] = useState("");
 
-
-
   const handleClick = () => {
     setShow(!show);
   };
@@ -30,15 +28,15 @@ const SignUp = () => {
     register,
     handleSubmit,
     watch,
-    formState: { errors},
+    formState: { errors },
   } = useForm({
-    defaultValues : {
-        name : "",
-        number : "",
-        email : "",
-        password : "",
-        cpassword : ""
-    }
+    defaultValues: {
+      name: "",
+      number: "",
+      email: "",
+      password: "",
+      cpassword: "",
+    },
   });
 
   const onSubmit = (data) => {
@@ -46,21 +44,20 @@ const SignUp = () => {
   };
 
   console.log("usestate data : ", value);
-  
 
   return (
     <Flex justifyContent="center" mt="20">
       <Box
-        border="1px solid gray"
+        shadow="md"
         p="10"
-        width="25%"
+        w={['90%','75%','60%','50%','30%']}
         height="fit-content"
         borderRadius="5"
       >
         <form onSubmit={handleSubmit(onSubmit)}>
           <Stack>
-            <Text pb="5" color="blue.300">
-              Registration Form
+            <Text pb="5" color="blue.700">
+              Registration From  here...
             </Text>
 
             <FormControl isInvalid={errors.name}>
@@ -150,11 +147,11 @@ const SignUp = () => {
                   type={show ? "text" : "password"}
                   {...register("cpassword", {
                     required: "This field is required",
-                    validate : (value) => {
-                        if(watch('password') !== value){
-                            return "password not matching";
-                        }
-                    }
+                    validate: (value) => {
+                      if (watch("password") !== value) {
+                        return "password not matching";
+                      }
+                    },
                   })}
                 />
                 <InputRightElement>

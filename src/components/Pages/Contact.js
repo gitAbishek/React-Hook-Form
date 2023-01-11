@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { useForm } from "react-hook-form";
 
@@ -11,11 +11,11 @@ import {
   Button,
   Stack,
   Textarea,
-  Divider,
+  
 } from "@chakra-ui/react";
 
 const Contact = () => {
-  const [userInfo, setUserInfo] = useState();
+ 
   const {
     register,
     handleSubmit,
@@ -31,8 +31,8 @@ const Contact = () => {
 
   console.log("watch", watch());
   const onSubmit = (data) => {
-    setUserInfo(data);
-    //console.log(data);
+    
+    console.log(data);
   };
   console.log("errors", errors);
   console.log("touchfields", touchedFields);
@@ -42,18 +42,17 @@ const Contact = () => {
   console.log("submitCount", submitCount)
 
   return (
-    <Flex justifyContent="center" alignItems="center" gap="10" mt="20">
+    <Flex justifyContent="center" alignItems="center" gap="10" mt="40">
       <Box
-        width="25%"
-        p="10"
+        width={['100%','80%','70%','70%','50%']}
+        p={['5','5','10','10','10']}
         height="fit-content"
-        border="1px solid pink"
         borderRadius="5"
       >
         <form onSubmit={handleSubmit(onSubmit)}>
           <Stack>
             <FormControl>
-              <FormLabel>Your Name</FormLabel>
+              <FormLabel color="gray.500">Your Name</FormLabel>
               <Input
                 type="text"
                 name="name"
@@ -76,7 +75,7 @@ const Contact = () => {
             </FormControl>
 
             <FormControl>
-              <FormLabel>Your Email</FormLabel>
+              <FormLabel color="gray.500">Your Email</FormLabel>
               <Input
                 name="email"
                 {...register("Email", { required: true })}
@@ -87,7 +86,7 @@ const Contact = () => {
             </FormControl>
 
             <FormControl>
-              <FormLabel>Message</FormLabel>
+              <FormLabel color="gray.500">Message</FormLabel>
               <Textarea
                 type="text"
                 name="message"
@@ -109,18 +108,7 @@ const Contact = () => {
           </Stack>
         </form>
       </Box>
-
-      <Divider orientation="vertical" />
-
-      <Box width="25%" p="10">
-        {userInfo ? (
-          <Box>
-            <p>Your Name is {userInfo.Name}</p>
-            <p>Your Email is {userInfo.Email}</p>
-            <p>And Message is {userInfo.Message}</p>
-          </Box>
-        ) : null}
-      </Box>
+      
     </Flex>
   );
 };
