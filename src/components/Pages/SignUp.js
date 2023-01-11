@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 
 import { BiShow } from "react-icons/bi";
 
@@ -21,6 +21,8 @@ const SignUp = () => {
   const [show, setShow] = useState(false);
   const [value, setValue] = useState("");
 
+
+
   const handleClick = () => {
     setShow(!show);
   };
@@ -29,13 +31,22 @@ const SignUp = () => {
     handleSubmit,
     watch,
     formState: { errors},
-  } = useForm();
+  } = useForm({
+    defaultValues : {
+        name : "",
+        number : "",
+        email : "",
+        password : "",
+        cpassword : ""
+    }
+  });
 
   const onSubmit = (data) => {
     setValue(data);
   };
 
   console.log("usestate data : ", value);
+  
 
   return (
     <Flex justifyContent="center" mt="20">
@@ -100,8 +111,8 @@ const SignUp = () => {
                   required: "This field is required",
                   pattern: {
                     value:
-                      /^([a-zA-Z0-9-.]{3,25})@([a-zA-Z0-9]{3,8}).([a-z]{2,5})$/,
-                    message: "Invalid ! plz use gmail format ",
+                      /^([a-zA-Z0-9-.]{1,50})@([a-zA-Z0-9]{2,25}).([a-z]{2,8})$/,
+                    message: "Invalid ! email address",
                   },
                 })}
               />
@@ -156,7 +167,7 @@ const SignUp = () => {
               </FormErrorMessage>
             </FormControl>
 
-            <Button type="submit" variant="solid" colorScheme="teal" >
+            <Button type="submit" variant="solid" colorScheme="teal">
               Create
             </Button>
           </Stack>
