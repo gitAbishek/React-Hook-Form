@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   Box,
@@ -9,29 +9,52 @@ import {
   Flex,
   Button,
   FormErrorMessage,
-  Text
+  Text,
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [value,setValue] = useState()
-  const { register, handleSubmit, formState :{ errors } } = useForm({
+  const [getData, setGetData] = useState([]);
+
+  const history = useNavigate()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
-      username: "",
+      email: "",
       password: "",
     },
   });
 
-  console.log(errors);
-
   const onSubmit = (data) => {
-    console.log('onSubmit data : ',data);
-    setValue(data)
+    const {email,password} = data;
+    if (getData && getData.email && getData.password) {
+      if (
+        getData.email === email &&
+        getData.password === password
+      ) {
+        history('/details')
+      } else {
+        alert('Invalid deatls !')
+      }
+    } else {
+      alert('No data in LocalStorage')
+    }
   };
-  console.log('usestate data',value)
+
+  useEffect(()=>{
+    const getItems = JSON.parse(localStorage.getItem("datakey"));
+      setGetData(getItems);
+  },[])
+
+  
+
   return (
     <Flex justifyContent="center" alignItems="center" gap="10" mt="20">
       <Box
-        width={['85%','65%','50%','40%','25%']}
+        width={["85%", "65%", "50%", "40%", "25%"]}
         p="10"
         height="fit-content"
         shadow="md"
@@ -39,24 +62,20 @@ const Login = () => {
       >
         <form onSubmit={handleSubmit(onSubmit)}>
           <Stack spacing="5">
-          <Text pb="5" color="blue.700">
+            <Text pb="5" color="blue.700">
               Login From here.....
             </Text>
-            <FormControl isInvalid={errors.username}>
-              <FormLabel color="gray.500">UserName</FormLabel>
+            <FormControl isInvalid={errors.email}>
+              <FormLabel color="gray.500">Email</FormLabel>
               <Input
-                id="username"
+                id="email"
                 type="text"
-                {...register("username", {
-                  required: "This field is requird",
-                  minLength: {
-                    value: 4,
-                    message: "Minimum Length should be 4",
-                  },
+                {...register("email", {
+                  required: "Email is required",
                 })}
               />
               <FormErrorMessage>
-                {errors.username && errors.username.message}
+                {errors.email && errors.email.message}
               </FormErrorMessage>
             </FormControl>
 
@@ -66,14 +85,12 @@ const Login = () => {
                 id="password"
                 type="password"
                 {...register("password", {
-                  required: "This field is requird",
-                  minLength: {
-                    value: 5,
-                    message: "Minimun Length should be 5",
-                  },
+                  required: "password is required",
                 })}
               />
-              <FormErrorMessage>{errors.password && errors.password.message}</FormErrorMessage>
+              <FormErrorMessage>
+                {errors.password && errors.password.message}
+              </FormErrorMessage>
             </FormControl>
 
             <Button type="submit" variant="solid" colorScheme="teal">

@@ -21,11 +21,10 @@ const Navbar = () => {
         <Flex pl="5" pr="5" gap="10">
           <NavLink to="/"> Home </NavLink>
 
-          
-
+          <NavLink to="/details">Details</NavLink>
           <NavLink to="/contact"> Contact </NavLink>
 
-          <NavLink to="/login"> Login </NavLink>
+          <NavLink to="/signin"> SignIn </NavLink>
 
           <NavLink to="/signup"> SignUp </NavLink>
         </Flex>

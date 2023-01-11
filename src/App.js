@@ -8,7 +8,7 @@ import Contact from './components/Pages/Contact';
 import Navbar from './components/Navbar/Navbar';
 import Login from './components/Pages/Login';
 import SignUp from './components/Pages/SignUp';
-import Posts from './components/Pages/Posts';
+import Details from './components/Pages/Details';
 
 import {Divider} from "@chakra-ui/react"
 
@@ -22,9 +22,9 @@ function App() {
      <Routes>
       <Route path="/" element={<Home />} />
       <Route path="contact" element={<Contact />} />
-      <Route path="login" element={<Login />}/>
+      <Route path="signin" element={<Login />}/>
       <Route path="signup" element={<SignUp />}/>
-      <Route path="posts" element={<Posts />} />
+      <Route path="details" element={<Details />} />
      </Routes>
     </div>
   );

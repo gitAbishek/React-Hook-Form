@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { BiShow } from "react-icons/bi";
 
 import { useForm } from "react-hook-form";
+
 import {
   Flex,
   Box,
@@ -16,11 +17,12 @@ import {
   Stack,
   InputRightElement,
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [show, setShow] = useState(false);
-  const [value, setValue] = useState("");
-
+  const history = useNavigate();
+  
   const handleClick = () => {
     setShow(!show);
   };
@@ -39,25 +41,24 @@ const SignUp = () => {
     },
   });
 
-  const onSubmit = (data) => {
-    setValue(data);
+  const onSubmit = (value) => {
+    localStorage.setItem("datakey", JSON.stringify(value));
+    history('/signin')
   };
-
-  console.log("usestate data : ", value);
 
   return (
     <Flex justifyContent="center" mt="20">
       <Box
         shadow="md"
         p="10"
-        w={['90%','75%','60%','50%','30%']}
+        w={["90%", "75%", "60%", "50%", "30%"]}
         height="fit-content"
         borderRadius="5"
       >
         <form onSubmit={handleSubmit(onSubmit)}>
           <Stack>
             <Text pb="5" color="blue.700">
-              Registration From  here...
+              Registration From here...
             </Text>
 
             <FormControl isInvalid={errors.name}>
