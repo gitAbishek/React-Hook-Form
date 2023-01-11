@@ -12,8 +12,8 @@ const Details = () => {
     if(getItems){
     setGetData(getItems);
     } else{
-      alert('LocalStorage is empty... Plz Sign In First')
-      history('/signin')
+      alert('LocalStorage is empty... Plz SignUp First')
+      history('/signup')
     }
   },[history])
 

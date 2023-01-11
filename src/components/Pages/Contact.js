@@ -77,6 +77,7 @@ const Contact = () => {
             <FormControl>
               <FormLabel color="gray.500">Your Email</FormLabel>
               <Input
+                type="email"
                 name="email"
                 {...register("Email", { required: true })}
                 aira-invalid={errors.Email ? "true" : "false"}
@@ -102,7 +103,7 @@ const Contact = () => {
               )}
             </FormControl>
 
-            <Button type="submit" variant="solid" colorScheme="blue">
+            <Button type="submit" variant="solid" colorScheme="blue" w="20%">
               Send
             </Button>
           </Stack>
