@@ -60,7 +60,7 @@ const SignUp = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <Stack>
             <Text pb="5" color="yellow.700" textAlign="center">
-              Registration From here...
+              Registration
             </Text>
 
             <FormControl isInvalid={errors.name}>

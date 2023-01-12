@@ -68,7 +68,7 @@ const Login = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <Stack spacing="5">
             <Text pb="5" color="yellow.700" textAlign="center">
-              Login From here.....
+              Login 
             </Text>
             <FormControl isInvalid={errors.email}>
               <FormLabel color="gray.500">Email</FormLabel>
