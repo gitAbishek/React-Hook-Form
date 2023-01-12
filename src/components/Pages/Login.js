@@ -67,7 +67,7 @@ const Login = () => {
       >
         <form onSubmit={handleSubmit(onSubmit)}>
           <Stack spacing="5">
-            <Text pb="5" color="blue.700">
+            <Text pb="5" color="yellow.700" textAlign="center">
               Login From here.....
             </Text>
             <FormControl isInvalid={errors.email}>
@@ -107,8 +107,8 @@ const Login = () => {
               Login
             </Button>
           </Stack>
-          <Flex gap="3" pt="5">
-          <Text>If you dont have Account ?</Text><Link color="blue"><NavLink to="/signup"> SignUp</NavLink></Link>
+          <Flex gap="3" pt="5" justifyContent="center">
+          <Text>Don't have a Account </Text><Link color="blue"><NavLink to="/signup"> SignUp</NavLink></Link>
           </Flex>
           
         </form>

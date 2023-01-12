@@ -16,8 +16,9 @@ import {
   Button,
   Stack,
   InputRightElement,
+  Link
 } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,NavLink } from "react-router-dom";
 
 const SignUp = () => {
   const [show, setShow] = useState(false);
@@ -58,7 +59,7 @@ const SignUp = () => {
       >
         <form onSubmit={handleSubmit(onSubmit)}>
           <Stack>
-            <Text pb="5" color="blue.700">
+            <Text pb="5" color="yellow.700" textAlign="center">
               Registration From here...
             </Text>
 
@@ -170,6 +171,9 @@ const SignUp = () => {
               Create
             </Button>
           </Stack>
+          <Flex gap="3" pt="5" justifyContent="center">
+          <Text>Already have an Account </Text><Link color="blue"><NavLink to="/signin"> SignIn</NavLink></Link>
+          </Flex>
         </form>
       </Box>
     </Flex>
