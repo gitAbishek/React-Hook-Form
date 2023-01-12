@@ -24,7 +24,7 @@ const Navbar = () => {
       >
         <Text pl={[null,null,'10','20','20']}  >Blogs</Text>
 
-        <Flex gap={["5","10"]} alignItems="center" flexWrap="wrap">
+        <Flex gap={["5","10"]} alignItems="center" flexWrap="wrap" mr="5">
           <NavLink to="/"> Home </NavLink>
           <NavLink to="/contact"> Contact </NavLink>
           {isLoggedIn ? <NavLink to="/details">Details</NavLink> :<NavLink to="/signin"> SignIn </NavLink>  }
