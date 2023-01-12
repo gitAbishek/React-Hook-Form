@@ -4,6 +4,11 @@ import { BiShow } from "react-icons/bi";
 
 import { useForm } from "react-hook-form";
 
+import  secureLocalStorage  from  "react-secure-storage";
+
+import IMGSignin from "../Image/signshow.jpeg";
+
+
 import {
   Flex,
   Box,
@@ -16,9 +21,10 @@ import {
   Button,
   Stack,
   InputRightElement,
-  Link
+  Link,
+  Image,
 } from "@chakra-ui/react";
-import { useNavigate,NavLink } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 
 const SignUp = () => {
   const [show, setShow] = useState(false);
@@ -43,29 +49,32 @@ const SignUp = () => {
   });
 
   const onSubmit = (value) => {
-    localStorage.setItem("datakey", JSON.stringify(value));
-    alert('Registration Successful ...')
+    secureLocalStorage.setItem("datakey", JSON.stringify(value));
+    secureLocalStorage.setItem("number", 12);
+	    secureLocalStorage.setItem("string", "12");
+	    secureLocalStorage.setItem("boolean", true);
+    alert("Registration Successful ...");
     history("/signin");
   };
 
   return (
-    <Flex justifyContent="center" mt="20">
+    <Flex justifyContent="space-evenly" gap="10" h="70vh" bgColor="black">
       <Box
         shadow="md"
-        p="10"
-        w={["90%", "75%", "60%", "50%", "30%"]}
-        height="fit-content"
-        borderRadius="5"
+        p="30"
+        w={["90%", "75%", "60%", "50%", "25%"]}
+        height="400px"
       >
         <form onSubmit={handleSubmit(onSubmit)}>
           <Stack>
-            <Text pb="5" color="yellow.700" textAlign="center">
-              Registration
+            <Text  color="pink" textAlign="center" fontSize="30">
+              Sign Up
             </Text>
 
             <FormControl isInvalid={errors.name}>
               <FormLabel color="gray.500">FullName</FormLabel>
               <Input
+                color="white"
                 id="name"
                 type="text"
                 {...register("name", { required: "This field is required" })}
@@ -78,6 +87,7 @@ const SignUp = () => {
             <FormControl isInvalid={errors.number}>
               <FormLabel color="gray.500">Number</FormLabel>
               <Input
+                color="white"
                 id="number"
                 type="number"
                 {...register("number", {
@@ -106,6 +116,7 @@ const SignUp = () => {
             <FormControl isInvalid={errors.email}>
               <FormLabel color="gray.500">Email</FormLabel>
               <Input
+                color="white"
                 id="email"
                 {...register("email", {
                   required: "This field is required",
@@ -125,6 +136,7 @@ const SignUp = () => {
               <FormLabel color="gray.500">Password</FormLabel>
               <InputGroup>
                 <Input
+                  color="white"
                   id="password"
                   type={show ? "text" : "password"}
                   {...register("password", {
@@ -145,6 +157,7 @@ const SignUp = () => {
               <FormLabel color="gray.500">Confirm password</FormLabel>
               <InputGroup>
                 <Input
+                  color="white"
                   id="cpassword"
                   name="cpassword"
                   type={show ? "text" : "password"}
@@ -172,9 +185,20 @@ const SignUp = () => {
             </Button>
           </Stack>
           <Flex gap="3" pt="5" justifyContent="center">
-          <Text>Already have an Account </Text><Link color="blue"><NavLink to="/signin"> SignIn</NavLink></Link>
+            <Text color="pink">Already have an Account </Text>
+            <Link color="blue">
+              <NavLink to="/signin"> SignIn</NavLink>
+            </Link>
           </Flex>
         </form>
+      </Box>
+      <Box alignSelf="center">
+        <Image
+          src={IMGSignin}
+          boxSize="400px"
+          objectFit="cover"
+          borderRadius="2"
+        ></Image>
       </Box>
     </Flex>
   );

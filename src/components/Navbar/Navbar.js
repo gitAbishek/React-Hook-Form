@@ -22,33 +22,51 @@ const Navbar = () => {
         justifyContent={["space-evenly", "space-between"]}
         alignItems="center"
         h={["40", "40", "40", "20", "20"]}
-        bg="black"
-        p={[null,null,null,null,"2"]}
+        //bg="black"
+        p={[null, null, null, null, "2"]}
       >
         {isLoggedIn ? (
-          <Text pl={[null, null, "10", "20", "20"]} color="white">
-            {getItems.name} Blogs
-          </Text>
+          <Flex flexDirection="row" gap="2">
+            <Text pl={[null, null, "10", "20", "20"]} color="red">
+              Employee
+            </Text>
+            <Text color="blue" fontWeight="bold">
+              {getItems.name}
+            </Text>
+          </Flex>
         ) : (
-          <Text pl={[null, null, "10", "20", "20"]} color="white"> Blogs</Text>
+          <Text pl={[null, null, "10", "20", "20"]} color="red">
+              Employee
+            </Text>
         )}
-        <Flex gap={["5", "10"]} alignItems="center"  textTransform="uppercase" color="pink" >
-          <NavLink to="/"> Home </NavLink>
-          <NavLink to="/contact"> Contact </NavLink>
+        <Flex gap={["5", "10"]} alignItems="center" textTransform="uppercase">
+          <NavLink to="/" fontWeight="bold">
+            {" "}
+            Home{" "}
+          </NavLink>
+          <NavLink to="/contact" fontWeight="bold">
+            {" "}
+            Contact{" "}
+          </NavLink>
           {isLoggedIn ? (
-            <NavLink to="/details">Details</NavLink>
+            <NavLink to="/details" fontWeight="bold">
+              Details
+            </NavLink>
           ) : (
-            <NavLink to="/signin"> SignIn </NavLink>
+            <NavLink to="/signin" fontWeight="bold">
+              {" "}
+              SignIn{" "}
+            </NavLink>
           )}
 
           {isLoggedIn ? (
             <NavLink to="/signout">
-              
               <Button
                 onClick={clear}
                 alignItems="center"
                 size="sm"
                 colorScheme="blue"
+                fontWeight="bold"
               >
                 SignOut
               </Button>

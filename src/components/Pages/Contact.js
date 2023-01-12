@@ -42,7 +42,7 @@ const Contact = () => {
   console.log("submitCount", submitCount)
 
   return (
-    <Flex justifyContent="center" alignItems="center" gap="10" mt="40">
+    <Flex justifyContent="center" alignItems="center" gap="10"  bgColor="black" h="70vh" >
       <Box
         width={['100%','80%','70%','70%','50%']}
         p={['5','5','10','10','10']}

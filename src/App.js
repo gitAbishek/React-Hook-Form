@@ -10,6 +10,7 @@ import Login from './components/Pages/Login';
 import SignUp from './components/Pages/SignUp';
 import Details from './components/Pages/Details';
 import SignOut from './components/Pages/SignOut';
+import Footer from './components/Pages/Footer';
 
 import {Divider} from "@chakra-ui/react"
 
@@ -28,6 +29,8 @@ function App() {
       <Route path="details" element={<Details />} />
       <Route path="signout" element={<SignOut />} />
      </Routes>
+     <Divider />
+     <Footer />
     </div>
   );
 }
