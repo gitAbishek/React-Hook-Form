@@ -43,6 +43,7 @@ const SignUp = () => {
 
   const onSubmit = (value) => {
     localStorage.setItem("datakey", JSON.stringify(value));
+    alert('Registration Successful ...')
     history("/signin");
   };
 

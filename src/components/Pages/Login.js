@@ -12,15 +12,16 @@ import {
   FormErrorMessage,
   Text,
   InputGroup,
-  InputRightElement
+  InputRightElement,
+  Link
 } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import {  NavLink, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [getData, setGetData] = useState([]);
   const [show, setShow] = useState(false);
 
-  const history = useNavigate()
+  const history = useNavigate();
   const {
     register,
     handleSubmit,
@@ -32,32 +33,28 @@ const Login = () => {
     },
   });
 
-  const handleClick = () =>{
-    setShow(!show)
-  }
+  const handleClick = () => {
+    setShow(!show);
+  };
 
   const onSubmit = (data) => {
-    const {email,password} = data;
+    const { email, password } = data;
     if (getData && getData.email && getData.password) {
-      if (
-        getData.email === email &&
-        getData.password === password
-      ) {
-        history('/details')
+      if (getData.email === email && getData.password === password) {
+        sessionStorage.setItem("Login details",JSON.stringify(data))
+        history("/details");
       } else {
-        alert('Invalid deatls !')
+        alert("Invalid deatls !");
       }
     } else {
-      alert('No data in LocalStorage')
+      alert("No data in LocalStorage");
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     const getItems = JSON.parse(localStorage.getItem("datakey"));
-      setGetData(getItems);
-  },[])
-
-  
+    setGetData(getItems);
+  }, []);
 
   return (
     <Flex justifyContent="center" alignItems="center" gap="10" mt="20">
@@ -90,14 +87,14 @@ const Login = () => {
             <FormControl isInvalid={errors.password}>
               <FormLabel color="gray.500">Password</FormLabel>
               <InputGroup>
-              <Input
-                id="password"
-                type={show ? "text" : "password"}
-                {...register("password", {
-                  required: "password is required",
-                })}
-              />
-              <InputRightElement>
+                <Input
+                  id="password"
+                  type={show ? "text" : "password"}
+                  {...register("password", {
+                    required: "password is required",
+                  })}
+                />
+                <InputRightElement>
                   <BiShow color="pink" cursor="pointer" onClick={handleClick} />
                 </InputRightElement>
               </InputGroup>
@@ -110,6 +107,10 @@ const Login = () => {
               Login
             </Button>
           </Stack>
+          <Flex gap="3" pt="5">
+          <Text>If you dont have Account ?</Text><Link color="blue"><NavLink to="/signup"> SignUp</NavLink></Link>
+          </Flex>
+          
         </form>
       </Box>
     </Flex>

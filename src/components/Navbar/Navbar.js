@@ -4,11 +4,12 @@ import React from "react";
 
 const Navbar = () => {
   const history = useNavigate()
+  var isLoggedIn = sessionStorage.getItem("Login details");
+  console.log('data :',isLoggedIn)
   const clear = (e) =>{
     e.preventDefault()
-    localStorage.clear()
-    history('/signup')
-
+    sessionStorage.clear()
+    history('/signin')
   }
   return (
     <>
@@ -25,13 +26,11 @@ const Navbar = () => {
 
         <Flex gap={["5","10"]} alignItems="center" flexWrap="wrap">
           <NavLink to="/"> Home </NavLink>
-
-          <NavLink to="/details">Details</NavLink>
           <NavLink to="/contact"> Contact </NavLink>
-
-          <NavLink to="/signin"> SignIn </NavLink>
-          <NavLink to="/signup"> SignUp </NavLink>
-          <NavLink to="/signout"> <Button onClick={clear} alignItems="center" size="sm" mr="2">SignOut</Button> </NavLink>
+          {isLoggedIn ? <NavLink to="/details">Details</NavLink> :<NavLink to="/signin"> SignIn </NavLink>  }
+          
+           {isLoggedIn ? <NavLink to="/signout"> <Button onClick={clear} alignItems="center" size="sm" mr="2">SignOut</Button> </NavLink> : null }
+          
         </Flex>
       </Box>
     </>
