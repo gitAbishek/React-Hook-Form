@@ -4,10 +4,9 @@ import { BiShow } from "react-icons/bi";
 
 import { useForm } from "react-hook-form";
 
-import  secureLocalStorage  from  "react-secure-storage";
+
 
 import IMGSignin from "../Image/signshow.jpeg";
-
 
 import {
   Flex,
@@ -49,10 +48,8 @@ const SignUp = () => {
   });
 
   const onSubmit = (value) => {
-    secureLocalStorage.setItem("datakey", JSON.stringify(value));
-    secureLocalStorage.setItem("number", 12);
-	    secureLocalStorage.setItem("string", "12");
-	    secureLocalStorage.setItem("boolean", true);
+    localStorage.setItem("datakey", JSON.stringify(value));
+    
     alert("Registration Successful ...");
     history("/signin");
   };
@@ -67,7 +64,7 @@ const SignUp = () => {
       >
         <form onSubmit={handleSubmit(onSubmit)}>
           <Stack>
-            <Text  color="pink" textAlign="center" fontSize="30">
+            <Text color="pink" textAlign="center" fontSize="30">
               Sign Up
             </Text>
 

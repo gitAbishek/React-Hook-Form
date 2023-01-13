@@ -48,7 +48,6 @@ const Login = () => {
       if (getData.email === email && getData.password === password) {
         sessionStorage.setItem("Login details",JSON.stringify(data))
         history("/details");
-        //sessionStorage.removeItem("Login details")
       } else {
         alert("Invalid deatls !");
       }
@@ -69,7 +68,6 @@ const Login = () => {
         p="30"
         //shadow="md"
         borderRadius="5"
-        //border="1px solid pink"
       >
         <form onSubmit={handleSubmit(onSubmit)}>
           <Stack spacing="5">

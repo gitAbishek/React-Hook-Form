@@ -1,12 +1,12 @@
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import { NavLink, useNavigate } from "react-router-dom";
+
 import React from "react";
 
 const Navbar = () => {
   const history = useNavigate();
   const getItems = JSON.parse(localStorage.getItem("datakey"));
   var isLoggedIn = sessionStorage.getItem("Login details");
-  console.log("data :", isLoggedIn);
   const clear = (e) => {
     e.preventDefault();
     sessionStorage.clear();

@@ -8,7 +8,7 @@ import IMG1 from "../Image/reactimage.jpeg";
 const Details = () => {
   const [getData, setGetData] = useState([]);
   const history = useNavigate();
-  console.log("data", getData);
+  console.log("data", getData.name);
   useEffect(() => {
     const getItems = JSON.parse(localStorage.getItem("datakey"));
     if (getItems) {
@@ -17,6 +17,8 @@ const Details = () => {
       history("/signin");
     }
   }, [history]);
+
+
 
   return (
     <Box
