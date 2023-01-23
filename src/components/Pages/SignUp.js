@@ -29,6 +29,8 @@ import {
 } from "@chakra-ui/react";
 import { useNavigate, NavLink } from "react-router-dom";
 
+console.log("process env .. ",process.env)
+
 const SignUp = () => {
   const [show, setShow] = useState(false);
   const history = useNavigate();
@@ -50,12 +52,14 @@ const SignUp = () => {
       cpassword: "",
     },
   });
+  
   const onSubmit = (value) => {
     const { name, username, email, password } = value;
 
+    const url = process.env.REACT_APP_API_FETCH;
     axios
       .post(
-        "http://blogpost.test/wp-json/wp/v2/users",
+        url+"/users",
         null,
         {
           params: { name, username, email, password },
