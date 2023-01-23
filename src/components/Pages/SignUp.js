@@ -4,7 +4,7 @@ import { BiShow } from "react-icons/bi";
 
 import { useForm } from "react-hook-form";
 
-
+import axios from "axios";
 
 import IMGSignin from "../Image/signshow.jpeg";
 
@@ -22,6 +22,10 @@ import {
   InputRightElement,
   Link,
   Image,
+  // AlertIcon,
+  // AlertTitle,
+  // Alert,
+  // AlertDescription,
 } from "@chakra-ui/react";
 import { useNavigate, NavLink } from "react-router-dom";
 
@@ -46,15 +50,52 @@ const SignUp = () => {
       cpassword: "",
     },
   });
-
   const onSubmit = (value) => {
+    const { name, username, email, password } = value;
+
+    axios
+      .post(
+        "http://blogpost.test/wp-json/wp/v2/users",
+        null,
+        {
+          params: { name, username, email, password },
+          headers: {
+            Authorization: "Bearer " + process.env.REACT_APP_JWT_TOKEN,
+          },
+        },
+        {}
+      )
+      .then((data) => {
+        console.log("res", data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     localStorage.setItem("datakey", JSON.stringify(value));
-    
-    alert("Registration Successful ...");
+    alert("Registration Successfull ...");
     history("/signin");
   };
 
   return (
+    <>
+    {/* <Alert
+        status="success"
+        variant="subtle"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        textAlign="center"
+        height="200px"
+      >
+        <AlertIcon boxSize="40px" mr={0} />
+        <AlertTitle mt={4} mb={1} fontSize="lg">
+          Application submitted!
+        </AlertTitle>
+        <AlertDescription maxWidth="sm">
+          Thanks for submitting your application. Our team will get back to you
+          soon.
+        </AlertDescription>
+      </Alert> */}
     <Flex justifyContent="space-evenly" gap="10" h="70vh" bgColor="black">
       <Box
         shadow="md"
@@ -81,32 +122,18 @@ const SignUp = () => {
               </FormErrorMessage>
             </FormControl>
 
-            <FormControl isInvalid={errors.number}>
-              <FormLabel color="gray.500">Number</FormLabel>
+            <FormControl isInvalid={errors.username}>
+              <FormLabel color="gray.500">UserName</FormLabel>
               <Input
                 color="white"
-                id="number"
-                type="number"
-                {...register("number", {
+                id="username"
+                type="text"
+                {...register("username", {
                   required: "This field is required",
-                  minLength: {
-                    value: 10,
-                    message:
-                      "Exact 10 digit number : currently having less than 10 digit",
-                  },
-                  maxLength: {
-                    value: 10,
-                    message:
-                      "Exact 10 digit number : currently having more than 10 digit",
-                  },
-                  pattern: {
-                    value: /9[7-8]{1}[0-9]{8}/,
-                    message: "Enter the valid number starting with 98 or 97",
-                  },
                 })}
               />
               <FormErrorMessage>
-                {errors.number && errors.number.message}
+                {errors.username && errors.username.message}
               </FormErrorMessage>
             </FormControl>
 
@@ -197,7 +224,9 @@ const SignUp = () => {
           borderRadius="2"
         ></Image>
       </Box>
+      
     </Flex>
+    </>
   );
 };
 

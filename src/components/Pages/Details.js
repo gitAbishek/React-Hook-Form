@@ -18,14 +18,12 @@ const Details = () => {
     }
   }, [history]);
 
-
-
   return (
     <Box
       w="80%"
       m="auto"
       display="flex"
-      flexDirection={["column","row"]}
+      flexDirection={["column", "row"]}
       justifyContent="space-evenly"
       h="70vh"
     >
@@ -46,14 +44,14 @@ const Details = () => {
         <Box display="flex" flexDirection="column">
           <Text color="green">Name </Text>
           <Text color="green">Email Id </Text>
-          <Text color="green">Contact Number </Text>
+          {/* <Text color="green">Contact Number </Text> */}
         </Box>
         <Box display="flex" flexDirection="column">
           <Text color="purple">{getData.name}</Text>
 
           <Text color="purple">{getData.email}</Text>
 
-          <Text color="purple">{getData.number}</Text>
+          {/* <Text color="purple">{getData.number}</Text> */}
         </Box>
       </Box>
     </Box>

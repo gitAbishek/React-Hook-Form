@@ -1,52 +1,137 @@
-import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
+
+import { useQuery } from "react-query";
 import axios from "axios";
 
-import { Container, Box, Heading, Button, Avatar } from "@chakra-ui/react";
+import {
+  Container,
+  Box,
+  Heading,
+  Button,
+  Avatar,
+  Text,
+  Flex,
+} from "@chakra-ui/react";
+import { useState } from "react";
 
 const Posts = () => {
-  const [posts, setPosts] = useState([]);
+  const [page, setPage] = useState(1);
+  const onSuccess = (data) => {
+    console.log("perform side effects after data fetching", data);
+  };
 
-  useEffect(() => {
-    let url = `${process.env.REACT_APP_API_ROOT}/posts`;
-    axios.get(url).then((res) => {
-      setPosts(res.data);
-    });
-  }, []);
+  const onError = (error) => {
+    console.log("perform side effects after encountering error", error);
+  };
 
-  console.log(posts);
+  const fetchPostData = async (pageparam) => {
+    return await axios.get(
+      `http://blogpost.test/wp-json/wp/v2/posts?per_page=3&page=${pageparam}`
+    );
+  };
+
+  const { isLoading, data, error, isError, isPreviousData } = useQuery(
+    ["key", page],
+    () => fetchPostData(page),
+    {
+      onSuccess,
+      onError,
+      keepPreviousData: true,
+    }
+  );
+
+  console.log("post data", data);
+
+  if (isLoading) {
+    return (
+      <Flex justify="center" h="90vh" mt="300">
+        <Text fontWeight="bold" fontSize="4xl">
+          Loading....
+        </Text>
+      </Flex>
+    );
+  }
+
+  if (isError) {
+    return (
+      <Flex justify="center" h="90vh" mt="300">
+        <Text fontWeight="bold" fontSize="4xl">
+          {error.message}
+        </Text>
+      </Flex>
+    );
+  }
+
   return (
-    <>
-      <Container display="flex" flexWrap="wrap" mt="10" gap="1">
-        {posts.map((curElem) => {
+    <Container
+      h="70vh"
+      display="flex"
+      flexDir="column"
+      justifyContent="center"
+      alignItems="center"
+      gap="10"
+      maxWidth="auto"
+      //mt="20"
+      position="sticky"
+    >
+      <Flex justify="center">
+        {data?.data.map((curElem) => {
           return (
-            <Box
-              w="250px"
-              h="250px"
-              p={4}
-              color="white"
-              m={4}
-              display="flex"
-              flexDir="column"
-              justifyContent="space-between"
-              alignItems="center"
-              boxShadow="md"
-              rounded="lg"
-              borderRadius="2"
-            >
-              <Heading as="h3" size="sm" color="gray" textAlign="center" >
-                {curElem.title.rendered}
-              </Heading>
+            <NavLink to={`/post/${curElem.id}`}>
+              <Box
+                key={curElem.id}
+                w="350px"
+                h="350px"
+                p={4}
+                color="white"
+                m={4}
+                display="flex"
+                flexDir="column"
+                justifyContent="space-around"
+                alignItems="center"
+                boxShadow="md"
+                rounded="lg"
+                borderRadius="2"
+              >
+                <Heading as="h3" size="sm" color="gray" textAlign="center">
+                  {curElem.title.rendered}
+                </Heading>
 
-              <Avatar size='lg' name='Dan Abrahmov' src='https://bit.ly/dan-abramov' />
+                <Avatar
+                  size="lg"
+                  name="Dan Abrahmov"
+                  src="https://bit.ly/dan-abramov"
+                />
 
-              <Button colorScheme="blue" variant="solid" size="md">
-                Visit Blog Details
-              </Button>
-            </Box>
+                {/* <Button colorScheme="blue" variant="solid" size="md">
+                  Visit Blog Details
+                </Button> */}
+              </Box>
+            </NavLink>
           );
         })}
-      </Container>
-    </>
+      </Flex>
+      <Flex w="80%" mx="auto" justifyContent="space-between">
+        <Button
+          colorScheme="blue"
+          disabled={page === 1}
+          onClick={() => {
+            setPage(page - 1);
+          }}
+        >
+          Previous
+        </Button>
+        <Button
+          colorScheme="blue"
+          onClick={() => {
+            setPage(page + 1);
+          }}
+          disabled={isPreviousData}
+        >
+          Next Page
+        </Button>
+      </Flex>
+    </Container>
   );
 };
 

@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../../../learning-management-system"
+		},
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../../../../opt/homebrew/var/www/Blogpost"
+		}
+	],
+	"settings": {}
+}

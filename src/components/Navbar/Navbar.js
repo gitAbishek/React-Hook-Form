@@ -1,9 +1,14 @@
-import { Box, Button, Flex, Text } from "@chakra-ui/react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Box, Button, Flex, Text, Link } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
+
+import { NavLink as RouterLink } from "react-router-dom";
+import { IconButton, useColorMode } from "@chakra-ui/react";
+import { FaMoon, FaSun } from "react-icons/fa";
 
 import React from "react";
 
 const Navbar = () => {
+  const { colorMode, toggleColorMode } = useColorMode();
   const history = useNavigate();
   const getItems = JSON.parse(localStorage.getItem("datakey"));
   var isLoggedIn = sessionStorage.getItem("Login details");
@@ -36,41 +41,87 @@ const Navbar = () => {
           </Flex>
         ) : (
           <Text pl={[null, null, "10", "20", "20"]} color="red">
-              Employee
-            </Text>
+            Employee
+          </Text>
         )}
         <Flex gap={["5", "10"]} alignItems="center" textTransform="uppercase">
-          <NavLink to="/" fontWeight="bold">
-            {" "}
-            Home{" "}
-          </NavLink>
-          <NavLink to="/contact" fontWeight="bold">
-            {" "}
-            Contact{" "}
-          </NavLink>
+          {/* {isLoggedIn ? (
+            <NavLink to="/user" fontWeight="bold">
+              USERS
+            </NavLink>
+          ) : null} */}
+
+          <IconButton
+            icon={colorMode === "light" ? <FaSun /> : <FaMoon />}
+            isRound="true"
+            size="lg"
+            alignSelf="flex-end"
+            onClick={toggleColorMode}
+          />
+
+          <Link as={RouterLink} to="/" _activeLink={{ color: "pink.400" }}>
+            Home
+          </Link>
+
           {isLoggedIn ? (
-            <NavLink to="/details" fontWeight="bold">
-              Details
-            </NavLink>
+            <Link
+              as={RouterLink}
+              to="/posts"
+              _activeLink={{ color: "pink.400" }}
+            >
+              Posts
+            </Link>
           ) : (
-            <NavLink to="/signin" fontWeight="bold">
-              {" "}
-              SignIn{" "}
-            </NavLink>
+            <Link
+              as={RouterLink}
+              to="/signin"
+              //_activeLink={{ color: "pink.400" }}
+            >
+              posts
+            </Link>
+          )}
+
+          <Link
+            as={RouterLink}
+            to="/create-post"
+            _activeLink={{ color: "pink.400" }}
+          >
+            Create-Posts
+          </Link>
+
+          {isLoggedIn ? (
+            <Link
+              as={RouterLink}
+              to="/details"
+              _activeLink={{ color: "pink.400" }}
+            >
+              Details
+            </Link>
+          ) : (
+            <Link
+              as={RouterLink}
+              to="/signin"
+              _activeLink={{ color: "pink.400" }}
+            >
+              SignIn
+            </Link>
           )}
 
           {isLoggedIn ? (
-            <NavLink to="/signout">
+            <Link
+              as={RouterLink}
+              to="/signout"
+              _activeLink={{ color: "pink.400" }}
+            >
               <Button
                 onClick={clear}
                 alignItems="center"
                 size="sm"
                 colorScheme="blue"
-                fontWeight="bold"
               >
                 SignOut
               </Button>
-            </NavLink>
+            </Link>
           ) : null}
         </Flex>
       </Box>
